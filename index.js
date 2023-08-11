@@ -15,7 +15,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 initRoutes(app)
 
-
+// const PORT = process.env.PORT || 8888
 const listener = app.listen(PORT, ()=>{
     console.log('server is running on the port '+listener.address().port)   
 })
