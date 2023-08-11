@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec babel-node index.js"
+    "start": "nodemon --exec babel-node index.js",
+    "build": "[my-framework] build --output public"
   },
+  
   "author": "",
   "license": "ISC",
   "dependencies": {
