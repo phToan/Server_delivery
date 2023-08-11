@@ -4,13 +4,10 @@ const app = express()
 const initRoutes = require('./src/routes')
 require('./connect_db')
 require ('dotenv').config()
-const PORT = process.env.PORT || 8888
+const PORT = process.env.PORT || 3000
 
 
-app.use(cors({
-    origin: process.env.CLIENT_URL ,//lay data trong file dotenv
-    methods: ['GET','POST','PUT','DELETE']
-}))
+app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 initRoutes(app)
@@ -19,6 +16,12 @@ initRoutes(app)
 const listener = app.listen(PORT, ()=>{
     console.log('server is running on the port '+listener.address().port)   
 })
+
+
+// {
+//     origin: process.env.CLIENT_URL ,//lay data trong file dotenv
+//     methods: ['GET','POST','PUT','DELETE']
+// }
 
 
     //KIỂU MAP 
