@@ -32,6 +32,7 @@ module.exports = (sequelize, DataTypes) => {
     status: DataTypes.INTEGER,
     customer_id: DataTypes.INTEGER,
     driver_id: DataTypes.INTEGER,
+    socket_id: DataTypes.STRING,
     confirm_order_at: DataTypes.DATE,
     delete_order_at: DataTypes.DATE,
   }, {

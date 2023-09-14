@@ -13,6 +13,8 @@ routes.post('/refresh_token',controllers.refreshToken_dri)
 routes.put('/',controllers.updateDriver)
 routes.put('/password',controllers.update_pass_dri)
 
+routes.get('/user', controllers.getUser)
+
 routes.use(verifyToken)
 routes.get('/', controllers.getDriver)
 

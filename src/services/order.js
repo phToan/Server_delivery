@@ -5,8 +5,9 @@ import { v4 } from 'uuid'
 
 export const createOrder = (body) => new Promise(async (resolve, reject) => {
     try {
+        console.log(body)
         const response = await db.Order.create(body)
-        console.log(response)
+        // console.log(response)
         resolve({
             err: response ? 0 : 1,
             mes: response ? 'Create orderer successfully' : 'Create order failed'
@@ -29,15 +30,14 @@ export const create_Order_dri = (body) => new Promise(async (resolve, reject) =>
     }
 })
 
-export const getOrder = (query) => new Promise(async (resolve, reject) => {
+export const getOrder = ({...query}) => new Promise(async (resolve, reject) => {
     try {
         // const queries = {raw: true, nest: true};
         const response = await db.Order.findAndCountAll({
-            where: {id: query.id},
+            where: query,
             attributes: {
-                // exclude: ['']
+                exclude: ['updateAt']
             }
-            // ...queries
         })
         
         resolve({
@@ -52,14 +52,15 @@ export const getOrder = (query) => new Promise(async (resolve, reject) => {
 
 export const deleteOrder = (body) => new Promise(async (resolve, reject) => {
     try {
-        const response = await db.Order.update({status: 4},{
+        console.log(body)
+        const response = await db.Order.update({status: body.status},{
             where: {
                 id: body.id
             }
         })
         resolve({
             err: response > 0 ? 0 : 1,
-            mes: response > 0 ? 'delete successfully' : 'not found item'
+            mes: response > 0 ? 'update successfully' : 'not found item'
         })
     } catch (error) {
         reject(error)
@@ -90,6 +91,30 @@ export const get_Order_dri = ({...query}) => new Promise(async (resolve, reject)
     }
 })
 
+export const getOrder_day = ({...query}) => new Promise(async (resolve, reject) => {
+    try {
+        const response = await db.Order_driver.findAndCountAll({
+            where: {
+                createdAt: {
+                    [Op.substring]: query.day
+                }
+            },
+            attributes: ['status'],
+            include: [
+                {model: db.Order, as: 'orderData', attributes:['price']}
+            ]
+            // ...queries
+        })
+        resolve({
+            err: response ? 0 : 1,
+            mes: response ? 'Got' : 'get orders failed',
+            data: response
+        })
+    } catch (error) {
+        reject(error)
+    }
+})
+
 export const delete_Order_dri = (body) => new Promise(async (resolve, reject) => {
     try {
         const response = await db.Order_driver.update({deleteAt: Date()},{
@@ -100,6 +125,39 @@ export const delete_Order_dri = (body) => new Promise(async (resolve, reject) =>
         resolve({
             err: response > 0 ? 0 : 1,
             mes: response > 0 ? 'delete successfully' : 'not found item'
+        })
+    } catch (error) {
+        reject(error)
+    }
+})
+
+export const updateOrders = (body) => new Promise(async (resolve, reject) => {
+    try {
+        console.log(body)
+        const response = await db.Order.update({...body},{
+            where: {
+                id: body.id
+            }
+        })
+        resolve({
+            err: response > 0 ? 0 : 1,
+            mes: response > 0 ? 'update successfully' : 'not found item'
+        })
+    } catch (error) {
+        reject(error)
+    }
+})
+
+export const updateOrder = (body) => new Promise(async (resolve, reject) => {
+    try {
+        const response = await db.Order_driver.update({...body},{
+            where: {
+                id_Order: body.id_Order
+            }
+        })
+        resolve({
+            err: response > 0 ? 0 : 1,
+            mes: response > 0 ? 'update successfully' : 'not found item'
         })
     } catch (error) {
         reject(error)

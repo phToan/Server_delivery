@@ -2,25 +2,21 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Order_drivers', {
+    await queryInterface.createTable('Sockets', {
       id: {
         allowNull: false,
+        autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      driver_id: {type: Sequelize.INTEGER, allowNull: false},
-      id_Order: {
+      user_id: {
+        type: Sequelize.INTEGER
+      },
+      type: {
+        type: Sequelize.INTEGER
+      },
+      socket_id: {
         type: Sequelize.STRING
-      },
-      status: {type: Sequelize.BOOLEAN},
-      takeAt: {
-        type: Sequelize.DATE
-      },
-      confirmAt: {
-        type: Sequelize.DATE
-      },
-      deleteAt: {
-        type: Sequelize.DATE
       },
       createdAt: {
         allowNull: false,
@@ -35,6 +31,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Order_drivers');
+    await queryInterface.dropTable('Sockets');
   }
 };

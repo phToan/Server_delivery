@@ -83,6 +83,24 @@ export const getDriver = (ID) => new Promise(async (resolve, reject) => {
     }
 })
 
+export const get_user = (body) => new Promise(async (resolve, reject) => {
+    try {
+        const response = await db.Driver.findOne({
+            where: { id: body.id },
+            attributes: {
+                exclude: ['password', 'refresh_token', 'status', 'createdAt', 'updatedAt']
+            }
+        })
+        resolve({
+            err: response ? 0 : 1,
+            mes: response ? 'Got' : 'User not found',
+            userData: response
+        })
+    } catch (error) {
+        reject(error)
+    }
+})
+
 export const updateDriver = ({...query}) => new Promise(async (resolve, reject) => {
     try {
         const response = await db.Driver.update(query, {

@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
   Order_driver.init({
     driver_id: DataTypes.INTEGER,
     status: DataTypes.BOOLEAN,
-    id_Order: DataTypes.INTEGER,
+    id_Order: DataTypes.STRING,
     takeAt: DataTypes.DATE,
     confirmAt: DataTypes.DATE,
     deleteAt: DataTypes.DATE,

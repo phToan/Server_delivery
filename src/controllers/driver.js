@@ -37,6 +37,16 @@ export const getDriver = async(req,res) => {
     }
 }
 
+export const getUser = async(req,res) => {
+    try {
+        console.log(req.query)
+        const response = await services.get_user(req.query)
+        return res.status(200).json(response)
+    } catch (error) {
+        return interalServerError(res)
+    }
+}
+
 export const updateDriver = async(req,res) => {
     try {
         const response = await services.updateDriver(req.body)

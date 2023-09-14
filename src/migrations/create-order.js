@@ -6,7 +6,7 @@ module.exports = {
       id: {
         allowNull: false,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       sender_name: {
         allowNull: false,
@@ -62,7 +62,8 @@ module.exports = {
       },
       driver_id: {
         type: Sequelize.INTEGER
-      },      
+      },
+      socket_id: { type: Sequelize.STRING },
       confirm_order_at: {
         type: Sequelize.DATE
       },
