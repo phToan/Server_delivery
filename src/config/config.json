@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "delivery",
-    "host": "127.0.0.1",
+    "username": "if0_35031669",
+    "password": "zo3AFMNeVvko",
+    "database": "if0_35031669_delivery",
+    "host": "185.27.134.10",
     "dialect": "mysql",
     "logging": false,
     "timezone": "+07:00"
