@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 const initRoutes = require('./src/routes');
 require('./connect_db');
-require('./auth_firebase');
+// require('./auth_firebase');
 require('dotenv').config();
 const PORT = process.env.PORT || 3000;
 // import { getDatabase, ref, push, set, onValue } from 'firebase/database';
