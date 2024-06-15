@@ -17,5 +17,6 @@ routes.get('/user', controllers.getUser)
 
 routes.use(verifyToken)
 routes.get('/', controllers.getDriver)
+routes.get('/all', controllers.getAllDriver)
 
 module.exports = routes

@@ -30,7 +30,7 @@ module.exports = {
       },
       point: {
         defaultValue: 0,
-        type: Sequelize.INTEGER
+        type: Sequelize.FLOAT
       },
       status: {
         defaultValue: false,

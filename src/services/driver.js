@@ -44,7 +44,7 @@ export const login_dri = ({ phone, password }) => new Promise(async (resolve, re
         })
         const isCheck = response && bcrypt.compareSync(password, response.password)
         const accessToken = isCheck
-            ? jwt.sign({ id: response.id, name: response.name, phone: response.phone }, process.env.JWT_SECRET, { expiresIn: '15s' })
+            ? jwt.sign({ id: response.id, name: response.name, phone: response.phone }, process.env.JWT_SECRET, { expiresIn: '1d' })
             : null
         const refreshToken = isCheck
             ? jwt.sign({ id: response.id }, process.env.JWT_SECRET_REFRESH_TOKEN, { expiresIn: '7d' })
@@ -71,6 +71,23 @@ export const getDriver = (ID) => new Promise(async (resolve, reject) => {
             where: { id: ID },
             attributes: {
                 // exclude: ['password', 'refresh_token', 'status', 'createdAt', 'updatedAt']
+            }
+        })
+        resolve({
+            err: response ? 0 : 1,
+            mes: response ? 'Got' : 'User not found',
+            userData: response
+        })
+    } catch (error) {
+        reject(error)
+    }
+})
+
+export const getAllDriver = (ID) => new Promise(async (resolve, reject) => {
+    try {
+        const response = await db.Driver.findAndCountAll({
+            attributes: {
+                exclude: ['password', 'refresh_token', 'createdAt', 'updatedAt']
             }
         })
         resolve({

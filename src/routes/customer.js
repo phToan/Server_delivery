@@ -15,5 +15,5 @@ routes.put('/password',controllers.update_pass_cus)
 
 routes.use(verifyToken)
 routes.get('/', controllers.getCurrent)
-
+routes.get('/all', controllers.getAll)
 module.exports = routes

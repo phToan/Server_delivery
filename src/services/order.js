@@ -7,18 +7,20 @@ export const createOrder = (body) => new Promise(async (resolve, reject) => {
     try {
         console.log(body)
         const response = await db.Order.create(body)
-        // console.log(response)
+        console.log(response)
         resolve({
             err: response ? 0 : 1,
             mes: response ? 'Create orderer successfully' : 'Create order failed'
         })
     } catch (error) {
         reject(error)
+        console.log(error);
     }
 })
 
 export const create_Order_dri = (body) => new Promise(async (resolve, reject) => {
     try {
+        console.log(body);
         const response = await db.Order_driver.create(body)
         console.log(response)
         resolve({
@@ -26,6 +28,7 @@ export const create_Order_dri = (body) => new Promise(async (resolve, reject) =>
             mes: response ? 'Create orderer successfully' : 'Create order failed'
         })
     } catch (error) {
+        console.log(error);
         reject(error)
     }
 })

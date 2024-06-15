@@ -45,7 +45,7 @@ export const login = ({ phone, password }) => new Promise(async (resolve, reject
         })
         const isCheck = response && bcrypt.compareSync(password, response.password)
         const accessToken = isCheck
-            ? jwt.sign({ id: response.id, name: response.name, phone: response.phone }, process.env.JWT_SECRET, { expiresIn: '15s' })
+            ? jwt.sign({ id: response.id, name: response.name, phone: response.phone }, process.env.JWT_SECRET, { expiresIn: '1d' })
             : null
         const refreshToken = isCheck
             ? jwt.sign({ id: response.id, name: response.name, phone: response.phone }, process.env.JWT_SECRET_REFRESH_TOKEN, { expiresIn: '7d' })
@@ -70,6 +70,21 @@ export const getUser = (userID) => new Promise(async (resolve, reject) => {
     try {
         const response = await db.Customer.findOne({
             where: { id: userID },
+            attributes: ['id','name','dob','gender','phone','point','status']
+        })
+        resolve({
+            err: response ? 0 : 1,
+            mes: response ? 'Got' : 'User not found',
+            userData: response
+        })
+    } catch (error) {
+        reject(error)
+    }
+})
+
+export const getAll = (id) => new Promise(async (resolve, reject) => {
+    try {
+        const response = await db.Customer.findAndCountAll({
             attributes: ['id','name','dob','gender','phone','point','status']
         })
         resolve({

@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     phone: DataTypes.STRING,
     password: DataTypes.STRING,
     vehicle_num: DataTypes.STRING,
+    point:DataTypes.FLOAT,
     status: DataTypes.BOOLEAN,
     refresh_token: DataTypes.STRING
   }, {
